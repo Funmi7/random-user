@@ -1,11 +1,10 @@
-body {
+body,
+html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   outline: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -41,4 +40,14 @@ p,
 .h6 {
   margin-top: 0;
   margin-bottom: 0;
+}
+.backdrop-init {
+  overflow: hidden;
+}
+.call-active.backdrop-init * {
+  pointer-events: none;
+}
+
+.backdrop-init .modal-backdrop {
+  visibility: visible;
 }

@@ -9,7 +9,7 @@ export const HomeWrapper = styled.section`
 `;
 
 export const TitleStyled = styled.h2`
-  font-size: 2.375rem;
+  font-size: 1.875rem;
   font-style: normal;
   font-weight: 800;
   line-height: 50px;
@@ -18,29 +18,37 @@ export const TitleStyled = styled.h2`
 
 export const TableContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin-top: 50px;
-  /* border: 1px solid rgba(219, 220, 224, 0.5); */
 
   .ag-theme-alpine {
     --ag-header-height: 44px;
     --ag-header-background-color: #fbfbfb;
+    --ag-background-color: #fff;
+    --ag-data-color: #000000;
+    --ag-row-hover-color: #f9f9f9;
+    --ag-odd-row-background-color: #fff;
+    --ag-borders: solid 1px;
+    --ag-border-color: rgba(219, 220, 224, 0.5);
+    --ag-font-family: "Poppins", sans-serif;
+    --ag-border-radius: 10px;
+    --ag-row-height: 72px;
 
     .ag-header-cell {
       font-size: 12px;
     }
+    .ag-header {
+      font-family: "Poppins", sans-serif;
+    }
   }
   .ag-root-wrapper {
-    border: solid 1px;
-    border-color: rgba(219, 220, 224, 0.5) !important;
+    border-radius: 10px;
   }
 `;
 
 export const CustomImageWrap = styled.div`
-  width: 40%;
+  padding: 10px;
   img {
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
 `;
