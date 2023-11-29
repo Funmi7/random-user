@@ -1,6 +1,6 @@
 import { useState, memo, useMemo, useCallback, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
-import { ColDef, GridReadyEvent, RowClickedEvent } from "ag-grid-community";
+import { ColDef, GridReadyEvent, CellClickedEvent } from "ag-grid-community";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -34,7 +34,7 @@ const Home = () => {
   }, []);
 
   const onGridReady = useCallback((params: GridReadyEvent) => {
-    fetch("https://randomuser.me/api/?format=PrettyJSON&results=50")
+    fetch("https://randomuser.me/api/?format=PrettyJSON&results=100")
       .then((res) => res.json())
       .then((data) => {
         const resultData = data.results.map((user: UserType) => ({
@@ -50,9 +50,11 @@ const Home = () => {
       });
   }, []);
 
-  const cellClickedListener = useCallback((event: RowClickedEvent) => {
-    setOpenDetailsModal(true);
-    setUserDetails(event.data);
+  const cellClickedListener = useCallback((event: CellClickedEvent) => {
+    if (event.column.getColId() === "0") {
+      setOpenDetailsModal(true);
+      setUserDetails(event.data);
+    }
   }, []);
 
   return (
@@ -72,8 +74,10 @@ const Home = () => {
             defaultColDef={defaultColDef}
             domLayout="autoHeight"
             rowSelection={"single"}
-            onRowClicked={cellClickedListener}
+            onCellClicked={cellClickedListener}
             rowHeight={72}
+            pagination={true}
+            paginationPageSize={20}
           ></AgGridReact>
         </div>
       </TableContainer>
