@@ -1,4 +1,4 @@
-import { useState, memo, useMemo, useCallback, useRef } from "react";
+import { useState, memo, useMemo, useCallback, useRef, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { ColDef, GridReadyEvent, CellClickedEvent } from "ag-grid-community";
 
@@ -8,11 +8,25 @@ import { TableType, UserType } from "common/types";
 import { HomeWrapper, TableContainer, TitleStyled } from "./home.styles";
 import DetailsModal from "screens/modal/DetailsModal";
 import { CustomArrrowCell, CustomImageCell } from "./components/CustomCells";
+import Pagination from "common/pagination/Pagination";
+
+const pageSize = 20;
 
 const Home = () => {
   const [rowData, setRowData] = useState<TableType[]>([]);
   const [openDetailsModal, setOpenDetailsModal] = useState<boolean>(false);
   const [userDetails, setUserDetails] = useState<TableType | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
+  const indexOfLastTransaction = currentPage * pageSize;
+  const indexOfFirstTransaction = indexOfLastTransaction - pageSize + 1;
+
+  const paginate = (pageNumber: any) => {
+    setCurrentPage(pageNumber);
+    setPageNumber(pageNumber);
+  };
 
   const gridRef = useRef<AgGridReact<TableType>>(null);
 
@@ -33,8 +47,11 @@ const Home = () => {
     };
   }, []);
 
-  const onGridReady = useCallback((params: GridReadyEvent) => {
-    fetch("https://randomuser.me/api/?format=PrettyJSON&results=100")
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(
+      `https://randomuser.me/api/?format=PrettyJSON&page=${pageNumber}&results=10&seed=abc`
+    )
       .then((res) => res.json())
       .then((data) => {
         const resultData = data.results.map((user: UserType) => ({
@@ -47,8 +64,9 @@ const Home = () => {
           country: user.location.country,
         }));
         setRowData(resultData);
+        setIsLoading(false);
       });
-  }, []);
+  }, [pageNumber]);
 
   const cellClickedListener = useCallback((event: CellClickedEvent) => {
     if (event.column.getColId() === "0") {
@@ -70,16 +88,24 @@ const Home = () => {
             rowData={rowData}
             columnDefs={columnDefs}
             animateRows={true}
-            onGridReady={onGridReady}
+            // onGridReady={onGridReady}
             defaultColDef={defaultColDef}
             domLayout="autoHeight"
             rowSelection={"single"}
             onCellClicked={cellClickedListener}
             rowHeight={72}
-            pagination={true}
-            paginationPageSize={20}
+            // pagination={true}
+            // paginationPageSize={20}
           ></AgGridReact>
         </div>
+        <Pagination
+          currentPage={currentPage}
+          totalTransactions={1000}
+          paginate={paginate}
+          indexOfFirstTransaction={indexOfFirstTransaction}
+          indexOfLastTransaction={indexOfLastTransaction}
+          pageSize={pageSize}
+        />
       </TableContainer>
       {openDetailsModal && (
         <DetailsModal

@@ -30,7 +30,7 @@ export const TableContainer = styled.div`
     --ag-odd-row-background-color: #fff;
     --ag-borders: solid 1px;
     --ag-border-color: rgba(219, 220, 224, 0.5);
-    --ag-font-family: "Poppins", sans-serif;
+    --ag-font-family: "Lato", sans-serif;
     --ag-border-radius: 10px;
     --ag-row-height: 72px;
     --ag-alpine-active-color: transparent;
@@ -40,7 +40,7 @@ export const TableContainer = styled.div`
       font-size: 12px;
     }
     .ag-header {
-      font-family: "Poppins", sans-serif;
+      font-family: "Lato", sans-serif;
     }
   }
   .ag-root-wrapper {
