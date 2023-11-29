@@ -11,7 +11,7 @@ import { CustomArrrowCell, CustomImageCell } from "./components/CustomCells";
 import Pagination from "common/components/pagination/Pagination";
 import Loader from "common/components/Loader";
 
-const pageSize = 20;
+const pageSize = 10;
 
 const Home = () => {
   const [rowData, setRowData] = useState<TableType[]>([]);
@@ -32,11 +32,11 @@ const Home = () => {
   const gridRef = useRef<AgGridReact<TableType>>(null);
 
   const [columnDefs] = useState<ColDef[]>([
-    { field: "picture", cellRenderer: memo(CustomImageCell) },
-    { field: "name" },
-    { field: "email" },
-    { field: "gender" },
-    { field: "phone" },
+    { field: "picture", cellRenderer: memo(CustomImageCell), minWidth: 100 },
+    { field: "name", minWidth: 100 },
+    { field: "email", minWidth: 100 },
+    { field: "gender", minWidth: 100 },
+    { field: "phone", minWidth: 100 },
     { cellRenderer: memo(CustomArrrowCell) },
   ]);
 
@@ -85,7 +85,7 @@ const Home = () => {
         <TableContainer className="animated fadeInUp">
           <div
             className="ag-theme-alpine"
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "100%", overflow: "hidden" }}
           >
             <AgGridReact<TableType>
               ref={gridRef}
@@ -99,7 +99,6 @@ const Home = () => {
               rowHeight={72}
             ></AgGridReact>
           </div>
-
           <Pagination
             currentPage={currentPage}
             totalTransactions={1000}

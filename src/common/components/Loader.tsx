@@ -2,18 +2,29 @@ import React from "react";
 import styled from "styled-components";
 
 const Loader = () => (
-  <LoaderStyled>
-    <span className="spinner"></span>
-  </LoaderStyled>
+  <LoaderWrapper>
+    <LoaderStyled>
+      <span className="spinner"></span>
+    </LoaderStyled>
+  </LoaderWrapper>
 );
+
+const LoaderWrapper = styled.section`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+`;
 
 const LoaderStyled = styled.div`
   position: absolute;
   display: grid;
-  top: 50%;
+  /* top: 50%;
   left: 50%;
   transform: translateX(-50%);
-  transform: translateY(-50%);
+  transform: translateY(-50%); */
   padding: 7px;
   background: #fff;
   border-radius: 100px;
