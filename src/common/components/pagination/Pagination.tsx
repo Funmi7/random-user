@@ -1,12 +1,21 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { ReactComponent as NextIcon } from "common/icons/next-caret.svg";
 import { ReactComponent as PreviousIcon } from "common/icons/prev-caret.svg";
 import { PaginationContainer } from "./paginationSyles";
 import { DOTS, usePagination } from "./usePagination";
 
-const Pagination = ({
-  siblingCount = 1,
+type PaginationProps = {
+  totalTransactions: number;
+  paginate: (pageNumber: number) => void;
+  currentPage: number;
+  indexOfFirstTransaction: number;
+  indexOfLastTransaction: number;
+  pageSize: number;
+};
+const siblingCount = 1;
+
+const Pagination: FC<PaginationProps> = ({
   totalTransactions,
   paginate,
   currentPage,
@@ -14,16 +23,16 @@ const Pagination = ({
   indexOfLastTransaction,
   pageSize,
 }) => {
-  const paginationRange = usePagination({
+  const paginationRange: (string | number)[] | undefined = usePagination({
     currentPage,
     totalTransactions,
     siblingCount,
     pageSize,
   });
-  if (currentPage === 0 || paginationRange.length < 2) {
+  if (currentPage === 0 || (paginationRange && paginationRange.length < 2)) {
     return null;
   }
-  let lastPage = paginationRange[paginationRange.length - 1];
+  let lastPage = paginationRange && paginationRange[paginationRange.length - 1];
 
   const onNext = () => {
     paginate(currentPage + 1);
@@ -50,7 +59,7 @@ const Pagination = ({
       </div>
       <div className="dashboard__pagination__right-side">
         <>
-          {paginationRange.map((pageNumber) => {
+          {paginationRange?.map((pageNumber) => {
             if (pageNumber === DOTS) {
               return <p key={pageNumber}>&#8230;</p>;
             }
@@ -62,7 +71,7 @@ const Pagination = ({
                     ? "dashboard__pagination__count-active"
                     : "dashboard__pagination__count-inactive"
                 }
-                onClick={() => paginate(pageNumber)}
+                onClick={() => paginate(Number(pageNumber))}
               >
                 {pageNumber}
               </p>

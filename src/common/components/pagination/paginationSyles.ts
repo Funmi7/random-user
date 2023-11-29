@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const PaginationContainer = styled.section`
+type PaginationContainerProps = {
+  firstDisable: boolean;
+  lastDisable: boolean;
+};
+export const PaginationContainer = styled.section<PaginationContainerProps>`
   width: 100%;
   display: flex;
   align-items: center;

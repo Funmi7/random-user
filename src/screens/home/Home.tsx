@@ -19,12 +19,12 @@ const Home = () => {
   const [userDetails, setUserDetails] = useState<TableType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageNumber, setPageNumber] = useState<number>(1);
   const indexOfLastTransaction = currentPage * pageSize;
   const indexOfFirstTransaction = indexOfLastTransaction - pageSize + 1;
 
-  const paginate = (pageNumber: any) => {
+  const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     setPageNumber(pageNumber);
   };
