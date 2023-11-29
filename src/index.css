@@ -44,10 +44,3 @@ p,
 .backdrop-init {
   overflow: hidden;
 }
-.call-active.backdrop-init * {
-  pointer-events: none;
-}
-
-.backdrop-init .modal-backdrop {
-  visibility: visible;
-}

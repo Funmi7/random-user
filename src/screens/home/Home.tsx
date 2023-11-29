@@ -55,24 +55,26 @@ const Home = () => {
     };
   }, []);
 
-  const cellClickedListener = useCallback((event: RowClickedEvent) => {
-    setOpenDetailsModal(true);
-    setUserDetails(event.data);
-  }, []);
-
   const onGridReady = useCallback((params: GridReadyEvent) => {
     fetch("https://randomuser.me/api/?format=PrettyJSON&results=50")
       .then((res) => res.json())
       .then((data) => {
         const resultData = data.results.map((user: UserType) => ({
           picture: user.picture.thumbnail,
+          biggerPicture: user.picture.medium,
           name: `${user.name.title} ${user.name.first} ${user.name.last}`,
           email: user.email,
           gender: user.gender,
           phone: user.phone,
+          country: user.location.country,
         }));
         setRowData(resultData);
       });
+  }, []);
+
+  const cellClickedListener = useCallback((event: RowClickedEvent) => {
+    setOpenDetailsModal(true);
+    setUserDetails(event.data);
   }, []);
 
   return (

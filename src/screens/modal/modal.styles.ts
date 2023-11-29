@@ -37,21 +37,99 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  min-height: 685px;
-  max-width: 560px;
+  min-height: 450px;
+  max-width: 450px;
   width: 100%;
   border-radius: 6px;
-  padding: 24.5px 33px 39px 37px;
+  padding: 20px;
   background: #ffffff;
   border: 1px solid rgba(219, 220, 224, 0.5);
   box-shadow: 15px 30px 40px rgba(0, 0, 0, 0.07);
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h3 {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    margin-top: 10px;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .profile-name {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 5px;
+
+      h4 {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      figure {
+        margin: 0px;
+
+        img {
+          border-radius: 50%;
+          width: 80px;
+          height: 80px;
+        }
+      }
+    }
+  }
+`;
+export const UserDetailsWrapper = styled.div`
+  margin-top: 25px;
+  .profile-details-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0px;
+    h5 {
+      color: #000;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      line-height: 20px;
+    }
+    p {
+      color: #979797;
+      font-size: 0.8125rem;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
 `;
 
 export const BackButton = styled.div`
   align-self: flex-start;
-  font-size: 0.75rem;
   cursor: pointer;
+  display: flex;
+  p {
+    font-size: 0.75rem;
+    color: #48d38a;
+  }
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
+`;
+
+export const Divider = styled.div`
+  border-top: 1px solid rgba(219, 220, 224, 0.5);
 `;

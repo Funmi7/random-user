@@ -4,15 +4,17 @@ export type UserType = {
   email: string;
   gender: string;
   phone: string;
+  country: string;
+  location: LocationType;
 };
 
-export type PictureType = {
+type PictureType = {
   large: string;
   medium: string;
   thumbnail: string;
 };
 
-export type NameType = {
+type NameType = {
   first: string;
   last: string;
   title: string;
@@ -24,8 +26,35 @@ export type TableType = {
   email: string;
   gender: string;
   phone: string;
+  biggerPicture: string;
+  country: string;
 };
 
 export type ColumnType = {
   field: string;
+};
+
+type LocationType = {
+  street: StreetType;
+  city: string;
+  state: string;
+  country: string;
+  postcode: string;
+  coordinates: CoordinateType;
+  timezone: TimezoneType;
+};
+
+type CoordinateType = {
+  latitude: string;
+  longitude: string;
+};
+
+type StreetType = {
+  number: string;
+  name: string;
+};
+
+type TimezoneType = {
+  offset: string;
+  description: string;
 };
