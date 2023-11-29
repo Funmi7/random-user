@@ -1,6 +1,6 @@
 import { useState, memo, useMemo, useCallback, useRef, useEffect } from "react";
 import { AgGridReact } from "ag-grid-react";
-import { ColDef, GridReadyEvent, CellClickedEvent } from "ag-grid-community";
+import { ColDef, CellClickedEvent } from "ag-grid-community";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -8,7 +8,8 @@ import { TableType, UserType } from "common/types";
 import { HomeWrapper, TableContainer, TitleStyled } from "./home.styles";
 import DetailsModal from "screens/modal/DetailsModal";
 import { CustomArrrowCell, CustomImageCell } from "./components/CustomCells";
-import Pagination from "common/pagination/Pagination";
+import Pagination from "common/components/pagination/Pagination";
+import Loader from "common/components/Loader";
 
 const pageSize = 20;
 
@@ -78,35 +79,37 @@ const Home = () => {
   return (
     <HomeWrapper className="animated fadeInUp">
       <TitleStyled>User Details</TitleStyled>
-      <TableContainer className="animated fadeInUp">
-        <div
-          className="ag-theme-alpine"
-          style={{ width: "100%", height: "100%" }}
-        >
-          <AgGridReact<TableType>
-            ref={gridRef}
-            rowData={rowData}
-            columnDefs={columnDefs}
-            animateRows={true}
-            // onGridReady={onGridReady}
-            defaultColDef={defaultColDef}
-            domLayout="autoHeight"
-            rowSelection={"single"}
-            onCellClicked={cellClickedListener}
-            rowHeight={72}
-            // pagination={true}
-            // paginationPageSize={20}
-          ></AgGridReact>
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          totalTransactions={1000}
-          paginate={paginate}
-          indexOfFirstTransaction={indexOfFirstTransaction}
-          indexOfLastTransaction={indexOfLastTransaction}
-          pageSize={pageSize}
-        />
-      </TableContainer>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <TableContainer className="animated fadeInUp">
+          <div
+            className="ag-theme-alpine"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <AgGridReact<TableType>
+              ref={gridRef}
+              rowData={rowData}
+              columnDefs={columnDefs}
+              animateRows={true}
+              defaultColDef={defaultColDef}
+              domLayout="autoHeight"
+              rowSelection={"single"}
+              onCellClicked={cellClickedListener}
+              rowHeight={72}
+            ></AgGridReact>
+          </div>
+
+          <Pagination
+            currentPage={currentPage}
+            totalTransactions={1000}
+            paginate={paginate}
+            indexOfFirstTransaction={indexOfFirstTransaction}
+            indexOfLastTransaction={indexOfLastTransaction}
+            pageSize={pageSize}
+          />
+        </TableContainer>
+      )}
       {openDetailsModal && (
         <DetailsModal
           closeModal={() => setOpenDetailsModal(false)}

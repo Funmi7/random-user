@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState, FC } from "react";
 
-import ReactPortal from "common/Portal";
+import ReactPortal from "common/components/Portal";
 import {
   ModalBackdropWrapper,
   ModalContainer,
