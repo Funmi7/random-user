@@ -9,6 +9,7 @@ import {
   Divider,
   IconContainer,
   UserDetailsWrapper,
+  Button,
 } from "./modal.styles";
 import { TableType } from "common/types";
 import { ReactComponent as BackArrow } from "common/icons/back-arrow.svg";
@@ -58,9 +59,9 @@ const DetailsModal: FC<DetailsModalProps> = ({ closeModal, userDetails }) => {
 
   return (
     <ReactPortal wrapperId="react-portal-modal-container">
-      <ModalWrapper ref={wrapperRef}>
+      <ModalWrapper>
         <ModalBackdropWrapper showBackdrop={showbackdrop}>
-          <ModalContainer>
+          <ModalContainer ref={wrapperRef} className="animated fadeInUp">
             <BackButton onClick={closeModal}>
               <div>
                 <BackArrow />
@@ -118,6 +119,7 @@ const DetailsModal: FC<DetailsModalProps> = ({ closeModal, userDetails }) => {
                 </div>
               </UserDetailsWrapper>
             </section>
+            <Button onClick={closeModal}>Okay</Button>
           </ModalContainer>
         </ModalBackdropWrapper>
       </ModalWrapper>

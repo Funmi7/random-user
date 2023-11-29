@@ -33,6 +33,8 @@ export const TableContainer = styled.div`
     --ag-font-family: "Poppins", sans-serif;
     --ag-border-radius: 10px;
     --ag-row-height: 72px;
+    --ag-alpine-active-color: transparent;
+    --ag-selected-row-background-color: #fff;
 
     .ag-header-cell {
       font-size: 12px;
@@ -51,4 +53,8 @@ export const CustomImageWrap = styled.div`
   img {
     border-radius: 5px;
   }
+`;
+
+export const CustomArrowWrap = styled.div`
+  cursor: pointer;
 `;

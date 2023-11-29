@@ -1,35 +1,13 @@
 import { useState, memo, useMemo, useCallback, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
-import {
-  ColDef,
-  ICellRendererParams,
-  GridReadyEvent,
-  RowClickedEvent,
-} from "ag-grid-community";
+import { ColDef, GridReadyEvent, RowClickedEvent } from "ag-grid-community";
 
-import { ReactComponent as RightArrow } from "common/icons/right-arrow.svg";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { TableType, UserType } from "common/types";
-import {
-  HomeWrapper,
-  TableContainer,
-  TitleStyled,
-  CustomImageWrap,
-} from "./home.styles";
+import { HomeWrapper, TableContainer, TitleStyled } from "./home.styles";
 import DetailsModal from "screens/modal/DetailsModal";
-
-const CustomImageCell = (cell: ICellRendererParams) => (
-  <CustomImageWrap>
-    <img src={cell.value} alt="profile pictures" />
-  </CustomImageWrap>
-);
-
-const CustomArrrowCell = () => (
-  <div>
-    <RightArrow />
-  </div>
-);
+import { CustomArrrowCell, CustomImageCell } from "./components/CustomCells";
 
 const Home = () => {
   const [rowData, setRowData] = useState<TableType[]>([]);
@@ -78,9 +56,9 @@ const Home = () => {
   }, []);
 
   return (
-    <HomeWrapper>
+    <HomeWrapper className="animated fadeInUp">
       <TitleStyled>User Details</TitleStyled>
-      <TableContainer>
+      <TableContainer className="animated fadeInUp">
         <div
           className="ag-theme-alpine"
           style={{ width: "100%", height: "100%" }}

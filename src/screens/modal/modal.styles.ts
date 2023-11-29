@@ -41,7 +41,7 @@ export const ModalContainer = styled.div`
   max-width: 450px;
   width: 100%;
   border-radius: 6px;
-  padding: 20px;
+  padding: 20px 20px 30px;
   background: #ffffff;
   border: 1px solid rgba(219, 220, 224, 0.5);
   box-shadow: 15px 30px 40px rgba(0, 0, 0, 0.07);
@@ -67,8 +67,10 @@ export const ModalContainer = styled.div`
     .profile-name {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 20px;
       padding-bottom: 5px;
+      margin-top: 20px;
 
       h4 {
         font-size: 1rem;
@@ -114,7 +116,7 @@ export const BackButton = styled.div`
   display: flex;
   p {
     font-size: 0.75rem;
-    color: #48d38a;
+    color: #23bc6a;
   }
 `;
 
@@ -132,4 +134,16 @@ export const IconContainer = styled.div`
 
 export const Divider = styled.div`
   border-top: 1px solid rgba(219, 220, 224, 0.5);
+`;
+
+export const Button = styled.button`
+  background: #23bc6a;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 106px;
+  height: 40px;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
 `;
