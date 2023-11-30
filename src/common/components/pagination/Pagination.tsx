@@ -2,7 +2,14 @@ import React, { FC } from "react";
 
 import { ReactComponent as NextIcon } from "common/icons/next-caret.svg";
 import { ReactComponent as PreviousIcon } from "common/icons/prev-caret.svg";
-import { PaginationContainer } from "./paginationSyles";
+import {
+  NextButtonWrap,
+  PaginationContainer,
+  PaginationCountWrap,
+  PaginationLeftWrap,
+  PaginationRightWrap,
+  PreviousButtonWrap,
+} from "./paginationSyles";
 import { DOTS, usePagination } from "./usePagination";
 
 type PaginationProps = {
@@ -43,48 +50,45 @@ const Pagination: FC<PaginationProps> = ({
   };
 
   return (
-    <PaginationContainer
-      firstDisable={currentPage === 1}
-      lastDisable={currentPage === lastPage}
-    >
-      <div className="dashboard__pagination__left-side">
-        <p className="dashboard__pagination__show-text">Showing: </p>
-        <p className="dashboard__pagination__total-count">
+    <PaginationContainer>
+      <PaginationLeftWrap>
+        <h5>Showing: </h5>
+        <p>
           {indexOfFirstTransaction} -{" "}
           {indexOfLastTransaction >= totalTransactions
             ? totalTransactions
             : indexOfLastTransaction}{" "}
           of {totalTransactions}
         </p>
-      </div>
-      <div className="dashboard__pagination__right-side">
+      </PaginationLeftWrap>
+
+      <PaginationRightWrap>
         <>
           {paginationRange?.map((pageNumber) => {
             if (pageNumber === DOTS) {
               return <p key={pageNumber}>&#8230;</p>;
             }
             return (
-              <p
+              <PaginationCountWrap
                 key={pageNumber}
-                className={
-                  pageNumber === currentPage
-                    ? "dashboard__pagination__count-active"
-                    : "dashboard__pagination__count-inactive"
-                }
+                activePage={pageNumber === currentPage}
                 onClick={() => paginate(Number(pageNumber))}
               >
                 {pageNumber}
-              </p>
+              </PaginationCountWrap>
             );
           })}
         </>
-        <span className="dashboard__pagination__previous" onClick={onPrevious}>
+        <PreviousButtonWrap
+          onClick={onPrevious}
+          firstDisable={currentPage === 1}
+        >
           <PreviousIcon />
-        </span>
-        <span className="dashboard__pagination__next" onClick={onNext}>
+        </PreviousButtonWrap>
+        <NextButtonWrap onClick={onNext} lastDisable={currentPage === lastPage}>
           <NextIcon />
-        </span>
-      </div>
+        </NextButtonWrap>
+      </PaginationRightWrap>
     </PaginationContainer>
   );
 };
